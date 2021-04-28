@@ -1,0 +1,20 @@
+{
+  "token":"wechat",
+  "appID": "wx01439dc741c0a629",
+  "mchid": "1589360751",
+  "appScrect":"aa0d7a9e4afaf1204fa17f0dbc86aa98",
+  "partnerKey": "2020zhaoguanxinxikejiZhangbing11",
+  "encodingAESKey":"WRXi0RAaELx2KoixLZnhDOiCeET6lOhN8wj8tOuv3GD",
+  "apiDomain":"https://api.weixin.qq.com/",
+  "apiURL":{
+      "accessTokenApi":"%scgi-bin/token?grant_type=client_credential&appid=%s&secret=%s",
+      "jssdkTicketApi":"%scgi-bin/ticket/getticket?access_token=%s&type=jsapi",
+      "getCodeApi":"%sconnect/oauth2/authorize?appid=%s&redirect_uri=%s&response_type=code&scope=%s&state=STATE#wechat_redirect",
+      "webAccessTokenApi":"%ssns/oauth2/access_token?appid=%s&secret=%s&code=%s&grant_type=authorization_code",
+      "getUserInfoApi":"%ssns/userinfo?access_token=%s&openid=%s&lang=zh_CN",
+      "createMenu":"%scgi-bin/menu/create?access_token=%s",
+      "sendTplMsg":"%scgi-bin/message/template/send?access_token=%s",
+      "sendMsg":"%scgi-bin/message/subscribe/send?access_token=%s",
+      "code2Session": "%ssns/jscode2session?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code"
+  }
+}

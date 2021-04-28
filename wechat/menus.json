@@ -1,0 +1,59 @@
+{
+  "button": [
+    {
+      "name": "健康指环",
+      "sub_button": [
+        {
+          "type": "view",
+          "name": "京东购买",
+          "url": "https://item.m.jd.com/product/67388782056.html"
+        },
+        {
+          "type": "view",
+          "name": "智能健康指环",
+          "url": "https://yinxingshu.megahealth.cn/?gid=5e704b910a8a8400814965eb"
+        },
+        {
+          "type": "view",
+          "name": "APP下载",
+          "url": "https://a.app.qq.com/o/simple.jsp?pkgname=com.zhaoguan.ring"
+        },
+        {
+          "type": "view",
+          "name": "使用指南",
+          "url": "http://m.weixinyunduan.com.cn/gzzh/artview-1.html?wid=504768&rid=986685"
+        }
+      ]
+    },
+    {
+      "name": "医疗养老",
+      "sub_button": [
+        {
+          "type": "view",
+          "name": "睡眠初筛",
+          "url": "https://mp.weixin.qq.com/s/yl-GtZb0vwk46igMex7j3g"
+        },
+        {
+          "type": "view",
+          "name": "血氧戒指",
+          "url": "https://mp.weixin.qq.com/s/hIhaYG-IjR6fd4NorqNuqw"
+        }
+      ]
+    },
+    {
+      "name": "公司介绍",
+      "sub_button": [
+        {
+          "type": "view",
+          "name": "关于兆观",
+          "url": "https://megahealth.cn"
+        },
+        {
+          "type": "click",
+          "name": "联系我们",
+          "key": "联系我们"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>用户信息</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="app">
+    <h2>用户信息</h2>
+    <div>
+      <img :src="userInfo.headimgurl">
+      <h2>{{ userInfo.nickname }}</h2>
+      <p>{{userInfo.country}} {{userInfo.province}} {{userInfo.city}}</p>
+      <button @click="sendTplMsg">发送模板消息</button>
+    </div>
+  </div>
+</body>
+<script src="js/vue.js"></script>
+<script src="js/axios.min.js"></script>
+<script src="js/jweixin-1.4.0.js"></script>
+<script>
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    apiDomain: 'https://wx.megahealth.cn/',
+    config: {},
+    userInfo: {}
+  },
+  methods: {
+    getConfig() {
+      var url = this.apiDomain + 'get_wx_jssdk_config';
+      axios.get(url)
+        .then(response=> {
+          this.config = response.data
+          wx.config({
+            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+            appId: response.data.appId, // 必填，公众号的唯一标识
+            timestamp: response.data.timestamp, // 必填，生成签名的时间戳
+            nonceStr: response.data.nonceStr, // 必填，生成签名的随机串
+            signature: response.data.signature,// 必填，签名
+            jsApiList: ['updateAppMessageShareData','updateTimelineShareData'] // 必填，需要使用的JS接口列表
+          });
+          wx.ready(function () {   //需在用户可能点击分享按钮前就先调用
+            var url = this.apiDomain + 'user.html';
+            wx.updateAppMessageShareData({ 
+              title: '123', // 分享标题
+              desc: '222', // 分享描述
+              link: url, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+              imgUrl: 'http://blog-img.zangtengfei.com/wp-content/uploads/2019/03/logo.jpg', // 分享图标
+              success: function () {
+                // 设置成功
+                // alert('分享设置成功');
+              }
+            }),
+            wx.updateTimelineShareData({ 
+              title: '123', // 分享标题
+              desc: '222', // 分享描述
+              link: url, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+              imgUrl: 'http://blog-img.zangtengfei.com/wp-content/uploads/2019/03/logo.jpg', // 分享图标
+              success: function () {
+                // 设置成功
+                // alert('分享设置成功');
+              }
+            })
+          });
+        })
+        .catch((error)=> {
+          console.log(error);
+        });
+    },
+    getUserInfo() {
+      var str = window.location.href;
+      var code = str.match(/code=(\S*)&/)&&str.match(/code=(\S*)&/)[1];
+      if(code) {
+        console.log(code);
+        var url = this.apiDomain+'get_wx_access_token?code='+code;
+        axios.get(url).then(result => {
+          this.userInfo = result.data;
+          console.log(this.userInfo.openid);
+        });
+      } else {
+        window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx408a3620d2284ac0&redirect_uri=https%3A%2F%2Fwx.megahealth.cn%2Fuser.html&response_type=code&scope=snsapi_userinfo';
+      }
+    },
+    sendTplMsg() {
+      var username = this.userInfo.nickname;
+      var openid = this.userInfo.openid;
+      var url = this.apiDomain+'send_tpl_msg?username='+username+'&openid='+openid;
+      axios.get(url).then(result=> {
+        console.log('发送成功');
+      });
+    }
+  },
+  mounted() {
+    this.getConfig();
+    this.getUserInfo();
+  }
+})
+</script>
+</html>
