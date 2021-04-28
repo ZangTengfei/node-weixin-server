@@ -1,11 +1,16 @@
-# Node.js 微信公众号开发 ![git start](https://img.shields.io/github/stars/silencehvk/wechatbynode.svg?style=social&label=Star) ![git fork](https://img.shields.io/github/forks/silencehvk/wechatbynode.svg?style=social&label=Fork) [![](https://img.shields.io/github/issues/silencehvk/wechatbynode.svg?style=social&label=Issues)](https://github.com/silencehvk/wechatbynode/issues) [![](https://img.shields.io/github/release/silencehvk/wechatbynode.svg?style=social&label=Releases)](https://github.com/silencehvk/wechatbynode/releases)
+# Node.js 微信公众号开发
 
-![node version](https://img.shields.io/badge/node-7.5.0-brightgreen.svg)
-![npm version](https://img.shields.io/badge/npm-4.1.2-brightgreen.svg)
-![express version](https://img.shields.io/badge/express-4.15.3-blue.svg)
-![xml2js](https://img.shields.io/badge/xml2js-0.4.17-orange.svg)
+# 概述
+
+目前该项目代码直接部署在 wx 这个 node 项目中，支持兆观医生公众号相关的开发，包括和兆观医生公众号绑定的微信支付功能。
+微信支付引入了 tenpay 这个微信支付库。
+
+wxapi 也使用了同样的微信支付代码，后续可合入。
+
+可考虑通过后台管理多套配置，这样可以只使用一套代码，并且可以动态配置。
 
 # 项目结构
+
 <pre>
 .
 ├── README.md           
@@ -20,20 +25,24 @@
 </pre>
 
 # 目标功能
+
 - [x] 微信接入功能
-- [x] access_token的获取、存储及更新
+- [x] access_token 的获取、存储及更新
 - [x] 自定义微信菜单
 - [x] 消息被动回复
 - [x] 消息加解密
+- [x] 微信支付
 
 # 构建项目
- 1. 将项目 clone 到本地
+
+1.  将项目 clone 到本地
+
     ```
     git clone git@github.com:SilenceHVK/wechatByNode.git
     ```
 
- 2. 打开项目配置文件 config.json
- 
+2.  打开项目配置文件 config.json
+
     ![config.json](http://img.blog.csdn.net/20170609144432242?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaHZrQ29kZXI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 
     修改文件的 token、appID 以及 appScrect 配置参数。其中 token、appID 与 appScrect 两个参数位于 [微信公众平台](https://mp.weixin.qq.com/) 左侧菜单的基本配置中
@@ -41,31 +50,32 @@
 
     ![开发这ID 与秘钥](http://img.blog.csdn.net/20170601095037229?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaHZrQ29kZXI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 
- 3. 进入 wechatByNode 文件并运行 app.js
+3.  进入 wechatByNode 文件并运行 app.js
+
     ```
     cd wechatByNode && node app.js  // Server runs at localhost:3000
     ```
 
- 4. 将服务地址映射外网，或部署到服务器。这里我使用内网穿透演示。
+4.  将服务地址映射外网，或部署到服务器。这里我使用内网穿透演示。
 
     - 打开花生壳的软件，点击内网穿透
-    ![内网穿透](http://img.blog.csdn.net/20170527132325667?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaHZrQ29kZXI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+      ![内网穿透](http://img.blog.csdn.net/20170527132325667?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaHZrQ29kZXI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 
-     - 点击添加映射
-    ![点击添加映射](http://img.blog.csdn.net/20170527132602551?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaHZrQ29kZXI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+    - 点击添加映射
+      ![点击添加映射](http://img.blog.csdn.net/20170527132602551?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaHZrQ29kZXI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 
     - 配置映射
-    ![配置映射](http://img.blog.csdn.net/20170527132805752?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaHZrQ29kZXI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
-    由于微信只接受80端口。 映射类型必须选择80端口，内网主机就是部署Node.js项目的电脑 IP 地址
+      ![配置映射](http://img.blog.csdn.net/20170527132805752?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaHZrQ29kZXI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+      由于微信只接受 80 端口。 映射类型必须选择 80 端口，内网主机就是部署 Node.js 项目的电脑 IP 地址
 
-5. 接入认证
+5.  接入认证
 
     ![接入认证](http://img.blog.csdn.net/20170527141026200?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaHZrQ29kZXI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 
     点击提交。提示提交成功，接入认证完成
     ![接入认证提交](http://img.blog.csdn.net/20170527141056778?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaHZrQ29kZXI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 
-6. 扫描微信二维码，关注公众号，就可以开始玩了
+6.  扫描微信二维码，关注公众号，就可以开始玩了
 
     ![微信公众号](http://img.blog.csdn.net/20170608184008076?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaHZrQ29kZXI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 
@@ -77,6 +87,6 @@
 
     ![微信接收事件消息](http://img.blog.csdn.net/20170608160434723?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaHZrQ29kZXI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 
-
   <!-- "appID":"wx25a60e1151bb48c4", -->
-  // "appScrect":"0f903f446ab406882ec5b9a88e7f476c",
+
+// "appScrect":"0f903f446ab406882ec5b9a88e7f476c",
